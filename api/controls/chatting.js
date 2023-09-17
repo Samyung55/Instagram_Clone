@@ -1,2 +1,26 @@
 const catchAsync = require("../middlewares/catchAsync");
 const Chat = require("../models/chatModel");
+
+exports.newChat = catchAsync(async (req, res, next) => {
+    const chatExists = await Chat.findOne({
+        users: {
+            $all: [req.user._id, req.body.recieverId]
+        }
+    });
+
+    if(chatExists) {
+        return res.status(200).json({
+            success: true,
+            newChat: chatExists
+        });
+    }
+    const newChat = await Chat.create({
+        users: [req.user._id, req.body.recieverId],
+    });
+
+    res.status(200).json({
+        success: true,
+        newChat
+    });
+})
+
