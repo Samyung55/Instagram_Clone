@@ -33,7 +33,45 @@ const userSchema = new mongoose.Schema({
         default: "Hi, Welcome To My Profile"
     },
     website: {
-        
+        type: String,
+        trim: true,
+    },
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post',
+        }
+    ],
+    saved: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ],
+    followers: [
+        {
+            type: mongoose.Schems.Types.ObjectId,
+            ref: 'User',
+        }
+    ],
+    following: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ],
+    resetPasswordToken: String,
+    resetPasswordExpiry: Date,
+});
+
+userSchema.pre("save", async function(next) {
+    if(this.isModified(password)) {
+        this.password = await bcrypt.hash(this.password, 10);
     }
+    next();
 })
+
+userSchema.methods.comparePassword = async function(enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password)
+}
 
