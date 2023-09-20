@@ -107,4 +107,22 @@ exports.updateCaption = catchAsync(async (req, res, next) => {
 });
 
 //Posts of Following
-exports.getPostsOfFollowing
+exports.getPostsOfFollowing = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user._id)
+
+    const currentPage = Number(req.query.page) || 1;
+
+    const skipPosts = 4 * (currentPage - 1);
+
+    const totalPosts = await Post.find({
+        postedBy: {
+            $in: user.following
+        }
+    }).countDocuments();
+
+    const posts = await Post.find({
+        postedBy: {
+            $in: user.following
+        }
+    })
+})
