@@ -153,5 +153,10 @@ exports.saveUnsavePost = catchAsync(async (req, res, next) => {
         post.savedBy = post.savedBy.filter((p) => p.toString() !== req.user._id.toString())
         await user.save();
         await post.save();
+        
+        return res.status(200).json({
+            success: true,
+            message: "Post Unsaved"
+        });
     }
 })
