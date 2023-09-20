@@ -17,8 +17,18 @@ exports.newMessage = catchAsync(async (req, res, next) => {
     await Chat.findByIdAndUpdate(chatId, { latestMessage: newMessage });
 
     res.status(200).json({
-        successL true,
+        success: true,
         newMessage,
     });
 });
 
+exports.getMessages = catchAsync(async (req, res, next) => {
+    const messages = await Message.find({
+        chatId: req.params.chatId
+    });
+
+    res.status(200).json({
+        success: true,
+        messages,
+    })
+})
