@@ -88,4 +88,8 @@ exports.updateCaption = catchAsync(async (req, res, next) => {
     if(!post) {
         return next(new ErrorHandler("Post Not Found", 404));
     }
+
+    if(post.comments.includes(req.user._id)) {
+        return next(new ErrorHandler("Comment Successful", 500));
+    }
 })
