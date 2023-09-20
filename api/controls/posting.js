@@ -92,4 +92,13 @@ exports.updateCaption = catchAsync(async (req, res, next) => {
     if(post.comments.includes(req.user._id)) {
         return next(new ErrorHandler("Comment Successful", 500));
     }
+
+    post.comments.push({
+        user: req.user._id,
+        comment: req.body.comment
+    });
+
+    await post.save();
+
+    
 })
