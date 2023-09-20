@@ -184,4 +184,9 @@ exports.getPostDetails = catchAsync(async (req, res, next) => {
     if (!post) {
         return next(new ErrorHandler("Post Not Found", 404));
     }
+
+    res.status(200).json({
+        success: true,
+        post,
+    });
 })
