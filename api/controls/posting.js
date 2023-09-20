@@ -83,5 +83,9 @@ exports.deletePost = catchAsync(async (req, res, next) => {
 
 // Update Caption
 exports.updateCaption = catchAsync(async (req, res, next) => {
-    
+    const post = await Post.findById(req.params.id);
+
+    if(!post) {
+        return next(new ErrorHandler("Post Not Found", 404));
+    }
 })
