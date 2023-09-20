@@ -171,3 +171,15 @@ exports.saveUnsavePost = catchAsync(async (req, res, next) => {
             message: "Post Saved"
         });
 });
+
+// Get Post Details
+exports.getPostDetails = catchAsync(async (req, res, next) => {
+    const post = await Post.findById(req.params.id).populate("postedBy likes").populate({
+        path: 'comments',
+        populate: {
+            path: 'user'
+        }
+    });
+
+    
+})
