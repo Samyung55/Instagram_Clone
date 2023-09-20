@@ -80,3 +80,8 @@ exports.deletePost = catchAsync(async (req, res, next) => {
         message: "Post Deleted"
     })
 })
+
+// Update Caption
+exports.updateCaption = catchAsync(async (req, res, next) => {
+    
+})
