@@ -131,5 +131,10 @@ exports.getPostsOfFollowing = catchAsync(async (req, res, next) => {
         }
     }).sort({ createdAt: -1}).limit(4).skip(skipPosts)
 
-    
-})
+    return res.status(200).json({
+        success: true,
+        posts: posts,
+        totalPosts
+    });
+});
+
