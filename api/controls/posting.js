@@ -140,5 +140,18 @@ exports.getPostsOfFollowing = catchAsync(async (req, res, next) => {
 
 // Save or Unsave Post
 exports.saveUnsavePost = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user._id)
 
-}
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+        return next(new ErrorHandler("Post Not Found", 404));
+    }
+
+    if (user.saved.includes(post._id.toString())) {
+        user.saved = user.saved.filter((p) => p.toString() !== post._id.toString())
+        post.savedBy = post.savedBy.filter((p) => p.toString() !== req.user._id.toString())
+        await user.save();
+        await post.save();
+    }
+})
