@@ -55,5 +55,25 @@ exports.likeUnlikePost = catchAsync(async (req, res, next) => {
 
 // Delete Post
 exports.deletePost = catchAsync(async (req, res, next) => {
+    const post = await Post.findById(req.params.id);
 
+    if(!post) {
+        return next(new ErrorHandler("Post Not Found", 404));
+    }
+
+    if(post.postedBy.toString() !== req.user._id.toString()) {
+        return next(new ErrorHandler("Unauthorized", 401));
+    }
+
+    await deleteFile(post.image);
+
+    await post.remove();
+
+    const user = await User.findById(req.user._id);
+
+    const index = user.posts.indexOf(req.params.id);
+    user.posts.splice(index, 1);
+    await user.save();
+
+    
 })
