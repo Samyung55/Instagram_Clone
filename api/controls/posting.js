@@ -138,3 +138,7 @@ exports.getPostsOfFollowing = catchAsync(async (req, res, next) => {
     });
 });
 
+// Save or Unsave Post
+exports.saveUnsavePost = catchAsync(async (req, res, next) => {
+
+}
