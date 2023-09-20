@@ -163,5 +163,11 @@ exports.saveUnsavePost = catchAsync(async (req, res, next) => {
         user.saved.push(post._id)
         post.savedBy.push(req.user._id)
 
-        
-})
+        await user.save();
+        await post.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Post Saved"
+        });
+});
