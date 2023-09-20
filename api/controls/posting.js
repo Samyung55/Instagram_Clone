@@ -124,5 +124,12 @@ exports.getPostsOfFollowing = catchAsync(async (req, res, next) => {
         postedBy: {
             $in: user.following
         }
-    })
+    }).populate("postedBy likes").populate({
+        path: 'comments',
+        populate: {
+            path: 'user'
+        }
+    }).sort({ createdAt: -1}).limit(4).skip(skipPosts)
+
+    
 })
