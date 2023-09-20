@@ -75,5 +75,8 @@ exports.deletePost = catchAsync(async (req, res, next) => {
     user.posts.splice(index, 1);
     await user.save();
 
-    
+    res.status(200).json({
+        success: true,
+        message: "Post Deleted"
+    })
 })
