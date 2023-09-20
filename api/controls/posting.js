@@ -4,6 +4,7 @@ const catchAsync = require('../middlewares/catchAsync');
 const ErrorHandler = require('../utils/errorHandler');
 const { deleteFile } = require('../utils/awsFunctions');
 
+// Create New Post
 exports.newPost = catchAsync(async (req, res, next) => {
     const postData = {
         caption: req.body.caption,
@@ -23,6 +24,7 @@ exports.newPost = catchAsync(async (req, res, next) => {
     });
 });
 
+// Like or Unlike Post
 exports.likeUnlikePost = catchAsync(async (req, res, next) => {
     const post = await Post.findById(req.params.id);
 
@@ -49,4 +51,9 @@ exports.likeUnlikePost = catchAsync(async (req, res, next) => {
             message: "Post Liked"
         });
     };
+})
+
+// Delete Post
+exports.deletePost = catchAsync(async (req, res, next) => {
+
 })
