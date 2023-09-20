@@ -90,7 +90,7 @@ exports.updateCaption = catchAsync(async (req, res, next) => {
     }
 
     if(post.comments.includes(req.user._id)) {
-        return next(new ErrorHandler("Comment Successful", 500));
+        return next(new ErrorHandler("Already Commented", 500));
     }
 
     post.comments.push({
@@ -100,5 +100,11 @@ exports.updateCaption = catchAsync(async (req, res, next) => {
 
     await post.save();
 
-    
-})
+    return res.status(200).json({
+        success: true,
+        message: "Comment Added"
+    });
+});
+
+//Posts of Following
+exports.getPostsOfFollowing
