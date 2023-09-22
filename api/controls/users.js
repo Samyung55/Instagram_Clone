@@ -110,4 +110,10 @@ exports.getUserDetails = catchAsync(async (req, res, next) => {
             path: 'postedBy'
         }
     })
+
+    res.status(200).json({
+        success: true,
+        user,
+    });
 })
+
