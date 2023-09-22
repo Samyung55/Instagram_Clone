@@ -32,3 +32,14 @@ exports.signupUpser = catchAsync(async (req, res, next) => {
     sendCookie(newUser, 201, res);
 });
 
+exports.loginUser = catchAsync(async (req, res, next) => {
+    const { userId, password } = req.body
+
+    const user = await User.findOne({
+        $or: [{ email: userId }, { username: userId }]
+    }).select("+password");
+
+    if(!user) {
+        return next(new ErrorHandler("User don't exit", 401));
+    }
+})
