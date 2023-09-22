@@ -21,5 +21,14 @@ exports.signupUpser = catchAsync(async (req, res, next) => {
         return next(new ErrorHandler("Email already exists", 401));
     }
 
-    
-})
+    const newUser = await User.create({
+        name,
+        email,
+        username,
+        password,
+        avatar: req.file.location
+    })
+
+    sendCookie(newUser, 201, res);
+});
+
