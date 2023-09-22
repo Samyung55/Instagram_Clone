@@ -170,7 +170,8 @@ exports.saveUnsavePost = catchAsync(async (req, res, next) => {
             success: true,
             message: "Post Saved"
         });
-});
+}});
+
 
 // Get Post Details
 exports.getPostDetails = catchAsync(async (req, res, next) => {
@@ -189,4 +190,9 @@ exports.getPostDetails = catchAsync(async (req, res, next) => {
         success: true,
         post,
     });
+})
+
+// Get All Posts
+exports.allPosts = catchAsync(async (req, res, next) => {
+    const posts = awai Post.find()
 })
