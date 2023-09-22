@@ -80,3 +80,8 @@ exports.getAccountDetails = catchAsync(async (req, res, next) => {
         user,
     })
 })
+
+// Get User Details
+exports.getUserDetails = catchAsync(async (req, res, next) => {
+
+}
