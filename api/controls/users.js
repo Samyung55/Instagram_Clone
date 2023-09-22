@@ -117,3 +117,13 @@ exports.getUserDetails = catchAsync(async (req, res, next) => {
     });
 })
 
+// Get User Details By Id
+exports.getUserDetailsById = catchAsync(async (req, res, next) => {
+
+    const user = await User.findById(req.params.id)
+
+    res.status(200).json({
+        success: true,
+        user,
+    });
+});
