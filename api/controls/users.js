@@ -42,4 +42,12 @@ exports.loginUser = catchAsync(async (req, res, next) => {
     if(!user) {
         return next(new ErrorHandler("User don't exit", 401));
     }
+
+    const isPasswordMatched = await user.comparePassword(password);
+
+    if (!isPasswordMatched) {
+        return next(new ErrorHandler("Password doesn't match", 401));
+    }
+
+    sendCookie(user, 201, res)
 })
