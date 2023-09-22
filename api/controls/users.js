@@ -66,3 +66,14 @@ exports.logoutUser = catchAsync(async (req, res, next) => {
     });
 });
 
+// Get User Details --Logged In User
+exports.getAccountDetails = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user._id).populate({
+        path: 'posts',
+        populate: {
+            path: 'postedBy'
+        }
+    });
+
+    
+})
