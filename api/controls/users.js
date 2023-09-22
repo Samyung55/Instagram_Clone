@@ -14,5 +14,12 @@ exports.signupUpser = catchAsync(async (req, res, next) => {
         $o: [{ email }, { username }]
     });
 
+    if (user) {
+        if (user.username === username) {
+            return next(new ErrorHandler("Username already exists", 401));
+        }
+        return next(new ErrorHandler("Email already exists", 401));
+    }
+
     
 })
