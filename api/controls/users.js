@@ -32,6 +32,7 @@ exports.signupUpser = catchAsync(async (req, res, next) => {
     sendCookie(newUser, 201, res);
 });
 
+// Login User
 exports.loginUser = catchAsync(async (req, res, next) => {
     const { userId, password } = req.body
 
@@ -50,4 +51,14 @@ exports.loginUser = catchAsync(async (req, res, next) => {
     }
 
     sendCookie(user, 201, res)
+})
+
+// Logout User
+exports.logoutUser = catchAsync(async (req, res, next) => {
+    res.cookie('token', null, {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+    });
+
+
 })
