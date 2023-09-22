@@ -134,5 +134,6 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 
     const users = await User.find();
 
-    
+    const suggestedUsers = users.filter((u) => !u.followers.includes(req.user._id) && u._id.toString() !== req.user._id.toString()).slice(-5)
+
 });
