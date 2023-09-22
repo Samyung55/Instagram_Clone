@@ -7,3 +7,12 @@ const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const { deleteFile } = require('../utils/awsFunctions');
 
+exports.signupUpser = catchAsync(async (req, res, next) => {
+    const {name, email, username, password } = req.body;
+
+    const user = await User.findOne({
+        $o: [{ email }, { username }]
+    });
+
+    
+})
