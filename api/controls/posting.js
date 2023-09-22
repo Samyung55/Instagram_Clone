@@ -195,4 +195,8 @@ exports.getPostDetails = catchAsync(async (req, res, next) => {
 // Get All Posts
 exports.allPosts = catchAsync(async (req, res, next) => {
     const posts = awai Post.find()
+
+    return res.status(200).json({
+        posts
+    });
 })
