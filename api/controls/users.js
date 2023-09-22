@@ -83,5 +83,13 @@ exports.getAccountDetails = catchAsync(async (req, res, next) => {
 
 // Get User Details
 exports.getUserDetails = catchAsync(async (req, res, next) => {
-
-}
+    const user = await User.findOne({ username: req.params.username }).populate("followers following").populate({
+        path: 'posts',
+        populate: {
+            path: 'comments',
+            populate: {
+                path: 'user'
+            }
+        },
+    })
+})
