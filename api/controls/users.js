@@ -104,5 +104,10 @@ exports.getUserDetails = catchAsync(async (req, res, next) => {
                 path: 'user'
             }
         },
+    }).populate({
+        path: 'saved',
+        populate: {
+            path: 'postedBy'
+        }
     })
 })
