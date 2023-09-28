@@ -15,3 +15,12 @@ const io = require("socket.io")(server, {
         origin: "http://localhost:3000",
     }
 });
+
+
+let users = [];
+
+
+const addUser = (userId, socketId) => {
+    !users.some((user) => user.userId === userId) &&
+        users.push({ userId, socketId });
+}
