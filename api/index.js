@@ -40,3 +40,6 @@ if (process.env.NODE_ENV === 'production') {
         res.send('Server is Running! 🚀');
     });
 }
+
+// error middleware
+app.use(errorMiddleware);
