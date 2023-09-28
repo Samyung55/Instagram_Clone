@@ -43,3 +43,5 @@ if (process.env.NODE_ENV === 'production') {
 
 // error middleware
 app.use(errorMiddleware);
+
+module.exports = app;
