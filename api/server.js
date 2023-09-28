@@ -32,3 +32,13 @@ const removeUser = (socketId) => {
 const getUser = (userId) => {
     return users.find((user) => user.userId === userId);
 }
+
+io.on("connection", (socket) => {
+    console.log("ЁЯЪА Someone connected!");
+    // console.log(users);
+
+    // get userId and socketId from client
+    socket.on("addUser", (userId) => {
+        addUser(userId, socket.id);
+        io.emit("getUsers", users);
+    });
