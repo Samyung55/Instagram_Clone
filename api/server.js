@@ -53,3 +53,9 @@ io.on("connection", (socket) => {
             content,
         });
     });
+    // typing states
+    socket.on("typing", ({ senderId, receiverId }) => {
+        const user = getUser(receiverId);
+        console.log(user)
+        io.to(user?.socketId).emit("typing", senderId);
+    });
