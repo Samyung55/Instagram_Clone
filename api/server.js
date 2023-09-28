@@ -64,3 +64,12 @@ io.on("connection", (socket) => {
         const user = getUser(receiverId);
         io.to(user?.socketId).emit("typing stop", senderId);
     });
+
+     // user disconnected
+     socket.on("disconnect", () => {
+        console.log("тЪая╕П Someone disconnected")
+        removeUser(socket.id);
+        io.emit("getUsers", users);
+        // console.log(users);
+    });
+});
